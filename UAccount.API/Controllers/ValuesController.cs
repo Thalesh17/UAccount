@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using UAccount.Repository.Data;
 
 namespace UAccount.API.Controllers
 {
