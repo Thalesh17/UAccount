@@ -100,6 +100,7 @@ namespace UAccount.API
             app.UseAuthentication();
 
             // app.UseHttpsRedirection();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
         }
     }

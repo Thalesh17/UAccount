@@ -54,17 +54,16 @@ namespace UAccount.Repository.Repository
 
             return await query.ToArrayAsync();
         }
-
-        public async Task<User> ObterPorUsuario(int UsuarioId)
+        
+        public async Task<Conta[]> ObterPorUsuario(int UsuarioId)
         {
-            IQueryable<User> query = _context.Users
-                                .Include(c => c.Contas);
+            IQueryable<Conta> query = _context.Contas;
 
             query = query
                     .AsNoTracking()
-                    .Where(c => c.Id == UsuarioId);
+                    .Where(c => c.UserId == UsuarioId).OrderByDescending(d => d.Vencimento);
 
-            return await query.FirstOrDefaultAsync();
+            return await query.ToArrayAsync();
         }
     }
 }

@@ -1,0 +1,167 @@
+<app-titulo [titulo]="titulo"></app-titulo>
+<div class="d-flex">
+  <div class="form-inline mr-auto">
+    <div class="form-group mb-2">
+      <label class="mr-2">Filtro: </label>
+      <input type="text" 
+      class="form-control mr-2" 
+      placeholder="Buscar por Titulo"
+      [(ngModel)]="filtroLista">
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-outline-primary" (click)="novaConta(template)"><i class="fa fa-plus-circle"></i>&nbsp; Nova Conta</button>
+  </div>
+</div>
+<h3>Filtro: {{filtroLista}}</h3>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Titulo</th>
+      <th>Resumo</th>
+      <th>Valor</th>
+      <th>Vencimento</th>
+      <th>Status</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="contas && contas.length">
+    <tr *ngFor="let conta of contasFiltradas">
+      <td>{{conta.titulo}}</td>
+      <td>{{conta.resumo}}</td>
+      <td>{{conta.valor.toString().replace('.', ',')}} R$</td>
+      <td>{{conta.vencimento | DateTimeFormatPipe}}</td>
+      <td>{{obterStatus(conta.vencimento)}}</td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-primary" tooltip="Editar" (click)="editarConta(conta, template)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" 
+          (click)="excluirConta(conta, confirm)"
+          tooltip="Excluir">
+          <i class="fa fa-eraser"></i>
+          </button>
+      </div>
+    </td>
+  </tr>
+</tbody>
+<tfoot *ngIf="!contas">
+  <tr>
+    <td colspan="7" class=text-center>
+      <h4>
+        Nenhum evento encontrado
+      </h4>
+    </td>
+  </tr>
+</tfoot>
+</table>
+
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1"
+role="dialog" aria-labelledby="dialog-sizes-name1">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 id="dialog-sizes-name1" class="modal-title pull-left">Large modal</h4>
+      <button type="button" class="close pull-right" (click)="template.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="registerForm">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Titulo</label>
+            <input type="text"
+            [ngClass]="{'is-invalid': registerForm.get('titulo').errors && registerForm.get('titulo').touched}" 
+            class="form-control" formControlName="titulo" placeholder="Insira um Titulo">
+            <div *ngIf="registerForm.get('titulo').hasError('required') && registerForm.get('titulo').touched" class="invalid-feedback">
+              O Titulo é obrigatório
+            </div>
+            <div *ngIf="registerForm.get('titulo').hasError('minlength') && registerForm.get('titulo').touched" class="invalid-feedback">
+              O Titulo deve ter no minimo 4 caracteres.
+            </div>
+            <div *ngIf="registerForm.get('titulo').hasError('maxlength') && registerForm.get('titulo').touched" class="invalid-feedback">
+              O Titulo deve ter no maximo 50 caracteres.
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Resumo</label>
+            <input type="text" 
+            [ngClass]="{'is-invalid': registerForm.get('resumo').errors && registerForm.get('resumo').touched}" 
+            class="form-control" formControlName="resumo" placeholder="Insira um Resumo" >
+            <div *ngIf="registerForm.get('resumo').hasError('required') && registerForm.get('resumo').touched" 
+              class="invalid-feedback">
+              O Resumo é obrigatório
+            </div>
+        </div>
+        </div>  
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Valor</label>
+            <input type="text" currencyMask
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left'}" 
+              [ngClass]="{'is-invalid': registerForm.get('valor').errors && registerForm.get('valor').touched}"
+              class="form-control" formControlName="valor" placeholder="R$ 0,00">
+            <div *ngIf="registerForm.get('valor').hasError('required') && registerForm.get('valor').touched"  
+              class="invalid-feedback">
+              O Valor é obrigatório
+            </div>
+          </div>
+            <div class="form-group col-md-6">
+              <label>Vencimento</label>
+              <input type="text"
+              bsDatepicker
+              [minDate]="minDate"
+              value="{{ vencimento | DateTimeFormatPipe}}"
+              [(ngModel)]="vencimento"
+              [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+              [ngClass]="{'is-invalid': registerForm.get('vencimento').errors && registerForm.get('vencimento').touched}" 
+              class="form-control" formControlName="vencimento">
+              <div *ngIf="registerForm.get('vencimento').hasError('required') && registerForm.get('vencimento').touched"
+              class="invalid-feedback">
+              O Vencimento é obrigatório
+            </div>
+        </div>  
+      </div>  
+    </form>
+  <br>
+  </div>
+<div class="modal-footer d-flex">
+  <button class="btn btn-secondary" (click)="template.hide()">
+    Fechar
+  </button>
+  <button class="btn btn-primary ml-auto" [disabled]="!registerForm.valid" (click)="salvarAlteracao(template)">
+    Salvar Alterações
+  </button>
+</div>
+</div>
+</div>
+</div>
+
+
+<div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+	<div class="modal-dialog modal-sm">
+  		<div class="modal-content">
+    		<div class="modal-header">
+      			<h4 class="modal-title pull-left">
+        			Deletando Conta
+      			</h4>
+      			<button type="button" class="close pull-right" (click)="confirm.hide()" aria-label="Close">
+        			<span aria-hidden="true">&times;</span>
+      			</button>
+    		</div>
+    		<div class="modal-body">
+      			<p>{{bodyDeletarConta}}</p>
+    		</div>    
+    		<div class="modal-footer btn-group d-flex">      
+      			<button type="button" class="btn btn-outline-primary" (click)="confirm.hide()">
+        			CANCELAR
+      			</button>
+      			<button type="button" class="btn btn-outline-danger" (click)="confirmeDelete(confirm)">
+          			DELETAR
+        		</button>
+    		</div>
+  		</div>
+	</div>
+</div>

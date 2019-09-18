@@ -46,6 +46,23 @@ namespace ProAgil.API.Controllers
             return Ok(new UserDTO());
         }
 
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> Get(string Id)
+        {
+            try
+            {
+                var usuarioConta = await _userManager.FindByIdAsync(Id);
+
+                var results = _mapper.Map<UserDTO>(usuarioConta);
+                
+                return Ok(results);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco de Dados falhou. {ex.Message}");
+            }
+        }
+
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register(UserDTO userDTO)

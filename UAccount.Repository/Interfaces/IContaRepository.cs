@@ -7,10 +7,8 @@ namespace UAccount.Repository.Interfaces
     public interface IContaRepository : IUAccountRepository
     {
         Task<Conta> ObterPorId(int ContaId);
-
-        Task<User> ObterPorUsuario(int UsuarioId);
-
+        
         Task<Conta[]> ObterTodosPorTituloAsync(string Titulo);
-
+        Task<Conta[]> ObterPorUsuario(int UsuarioId);
     }
 }

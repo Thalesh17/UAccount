@@ -1,0 +1,12 @@
+
+<div class="container-fluid well span6">
+    <div class="row-fluid">
+        <div *ngIf="user" class="span8">
+            <br>
+            <h1>{{user.nomeCompleto}}</h1>
+            <h6>Login: {{user.userName}}</h6>
+            <h6>Email: {{user.email}}</h6>
+            <h6>Telefone: {{user.phoneNumber | mask: '(00) 00000-0000'}}</h6>
+        </div>
+    </div>
+</div>
