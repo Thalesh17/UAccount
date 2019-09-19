@@ -5,7 +5,7 @@ Projeto desenvolvido utilizando Angular como Front-End consumindo uma API desenv
 ## Ferramentas utilizadas
 
   - C# AspNet Core
-  - Angular
+  - Angular CLI(7.2.2.)
   - Entity Framework
   - AutoMapper
   - Data Anottacions
