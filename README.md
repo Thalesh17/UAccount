@@ -1,4 +1,4 @@
-## UAccount
+# UAccount
 
 Projeto desenvolvido utilizando Angular como Front-End consumindo uma API desenvolvida em C# AspNetCore.
 
@@ -11,13 +11,13 @@ Projeto desenvolvido utilizando Angular como Front-End consumindo uma API desenv
   - Data Anottacions
   - JWT (JSON WEB TOKENS)
 
-# Padrão Utilizado!
+### Padrão Utilizado!
 
   - O projeto foi padronizado seguindo alguns conceitos da modelagem DDD (Domain Driver Designer)
 
 
-A Aplicação:
-  - Aplicação é um CRUD para cadastro de Contas a pagar com autenticação de token de usuario e consumo de API.
+### O que é:
+  - Aplicação é um CRUD para cadastro de Contas a pagar com autenticação de token de usuario e consumo de API. É possivel com o aplicativo acompanhar as finanças a partir do cadastro na WEB.
 
 ### Instalação e Uso da aplicação
 
