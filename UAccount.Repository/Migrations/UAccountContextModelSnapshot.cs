@@ -184,7 +184,7 @@ namespace UAccount.Repository.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<decimal>("Valor");
+                    b.Property<double>("Valor");
 
                     b.Property<DateTime>("Vencimento");
 

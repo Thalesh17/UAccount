@@ -9,7 +9,7 @@ using UAccount.Repository.Data;
 namespace UAccount.Repository.Migrations
 {
     [DbContext(typeof(UAccountContext))]
-    [Migration("20190918003109_init")]
+    [Migration("20190919012606_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,7 +186,7 @@ namespace UAccount.Repository.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<decimal>("Valor");
+                    b.Property<double>("Valor");
 
                     b.Property<DateTime>("Vencimento");
 

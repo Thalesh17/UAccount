@@ -29,7 +29,6 @@ export class ContasComponent implements OnInit {
 
   constructor(
     private contaService: ContaService
-   ,private modalService: BsModalService
    ,private fb: FormBuilder
    ,private localeService: BsLocaleService
    ,private toastr: ToastrService
@@ -101,7 +100,7 @@ export class ContasComponent implements OnInit {
     this.modoSalvar = 'put';
     this.openModal(template);
     this.conta = Object.assign({}, conta);
-    console.log(this.conta);
+    this.registerForm.patchValue(this.conta);
   }
 
   validation() {
@@ -149,7 +148,6 @@ export class ContasComponent implements OnInit {
 
     let diferencaDias = this.obterDiferencaData(vencimento, dataAtual);
 
-    console.log(diferencaDias);
 
     if(vencimento < dataAtual){
       return `Atrasado ${diferencaDias} dias`;

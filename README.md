@@ -29,17 +29,13 @@ Projeto desenvolvido utilizando Angular como Front-End consumindo uma API desenv
  - Após instalação do NodeJS, abra o terminal e acesse o diretório '$cd UAccount-App'
  
  - 2º Passo
- - Rodar o comando de instalação das dependencias do NPM '$npm install'
-
- - 3º Passo
  - Após a instalação, digite '$ ng serve' para rodar a aplicação Angular.
 
- - 4º Passo 
+ - 3º Passo
  - Abra outro terminal e acesse o diretório '$cd UAccount.API'
 
- - 5º Passo
+ - 4º Passo 
  - Execute o comando '$ dotnet watch run'
 
- - 6º Passo
+ - 5º Passo
  - Acesse a URL (http://localhost:4200/user/login) e crie uma conta.
-

@@ -163,7 +163,7 @@ namespace UAccount.Repository.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Titulo = table.Column<string>(nullable: true),
                     Resumo = table.Column<string>(nullable: true),
-                    Valor = table.Column<decimal>(nullable: false),
+                    Valor = table.Column<double>(nullable: false),
                     Vencimento = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
