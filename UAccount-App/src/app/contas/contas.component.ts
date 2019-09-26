@@ -173,4 +173,22 @@ export class ContasComponent implements OnInit {
   toDateOnly(date: any) {
     return date;
   }
+
+
+  currentDateTime: string;
+  hora: any;
+
+  obterJson(){
+    this.contaService.obterJson().subscribe(
+      (e) => {
+        console.log(e);
+        let dataAtual = new Date(e.currentDateTime);
+        this.currentDateTime = e.currentDateTime;
+        this.hora = dataAtual.getHours() + ':' + dataAtual.getMinutes();
+
+
+      }, error => {
+        this.toastr.success(`Erro ao gerar: ${error} `);              
+      }
+    );  }
 }

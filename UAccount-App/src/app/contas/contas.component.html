@@ -122,8 +122,28 @@ role="dialog" aria-labelledby="dialog-sizes-name1">
               class="invalid-feedback">
               O Vencimento é obrigatório
             </div>
-        </div>  
-      </div>  
+          </div>
+        </div>
+        <!-- <div class="form-row">
+          <div class="form-group col-md-3">    
+              <button class="btn btn-primary ml-auto" (click)="obterJson()">
+                Data
+              </button>
+          </div>
+        </div>  -->
+        <div class="form-row">
+          <div class="input-group">     
+              <label>Data</label>
+              <input type="text" class="form-control form-inline" formControlName="data" value="{{currentDateTime | DateTimeFormatPipe }}">
+              <span class="btn btn-primary" (click)="obterJson()">
+                  Data
+              </span>
+          </div>
+          <div class="form-group col-md-6">     
+              <label>Hora</label>
+              <input type="text" class="form-control" formControlName="data" value="{{hora}}">
+          </div> 
+        </div> 
     </form>
   <br>
   </div>

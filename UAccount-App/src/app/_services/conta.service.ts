@@ -29,4 +29,7 @@ export class ContaService {
         return this.http.delete(`${this.baseURL}/${id}`);
       }
 
+      obterJson(): any {
+        return this.http.get('http://worldclockapi.com/api/json/est/now');
+      }
 }
